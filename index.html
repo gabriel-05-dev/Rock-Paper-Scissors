@@ -7,8 +7,9 @@
 <body>
 <script>
 let score = 0;
-let Hscore = 0;
-let Cscore = 0;
+let Score_human = 0;
+let Score_comp = 0;
+
 
 function getComputerChoice() {
   let integerRandom = 0;
@@ -18,34 +19,66 @@ function getComputerChoice() {
   return choiceComputer
 }
 
-function getHumanChoice() {
+function getHumanChoice() { //maybe add error check to see ensure human mistakes are accounted for e.g incorrect spelling
     choiceHuman = prompt("Rock, Paper or Scissors?");
     choiceHuman = choiceHuman.toLowerCase();
     return choiceHuman
 }
 
 function playround(choiceComputer, choiceHuman) {
+  let Hscore = 0;
+  let Cscore = 0; 
   if (choiceComputer === "rock" & choiceHuman === "paper") {
     Hscore++
+    console.log("Human wins")
   } else if (choiceComputer ==="rock" & choiceHuman === "scissors") {
     Cscore++
+    console.log("Computer wins")
   } else if (choiceComputer ==="paper" & choiceHuman === "rock") {
     Cscore++
+    console.log("Computer wins")
   }  else if (choiceComputer ==="paper" & choiceHuman === "scissors") {
     Hscore++
+    console.log("Human wins")
   }  else if (choiceComputer ==="scissors" & choiceHuman === "rock") {
     Hscore++
+    console.log("Human wins")
   }  else if (choiceComputer ==="scissors" & choiceHuman === "paper") {
     Cscore++
-}
-return Cscore;
-return Hscore;
+    console.log("Computer wins")
+  } else if (choiceComputer == choiceHuman) {
+    Cscore = Cscore;
+    Hscore = Hscore;
+    console.log("draw")
+  }
+
+  if (Hscore > Cscore) {
+    Score_human++
+  } else {
+    Score_comp++
+  }
 }
 
+function VerifyWinner(Score_human, Score_comp) {
+  if (Score_human < Score_comp) {
+    alert("Computer Wins the game")
+  } else if (Score_human > Score_comp) {
+    alert("Human Wins the game")
+  }
+}
 
 getHumanChoice();
 getComputerChoice();
-playround(choiceComputer,choiceHuman);
+playround(choiceComputer, choiceHuman);
+playround(getHumanChoice(), getComputerChoice());
+playround(getHumanChoice(), getComputerChoice());
+playround(getHumanChoice(), getComputerChoice());
+playround(getHumanChoice(), getComputerChoice());
+VerifyWinner(Score_human, Score_comp);
+
+// To improve maybe i should add a function to call these functions? e.g main?
+
+
 /*
 
 Pseudo
