@@ -18,36 +18,26 @@ function getHumanChoice() { //maybe add error check to see ensure human mistakes
 }
 
 function playround(choiceComputer, choiceHuman) {
-  let Hscore = 0;
-  let Cscore = 0; 
   if (choiceComputer === "rock" & choiceHuman === "paper") {
-    Hscore++
+    Score_human++
     console.log("Human wins")
   } else if (choiceComputer ==="rock" & choiceHuman === "scissors") {
-    Cscore++
+    Score_comp++
     console.log("Computer wins")
   } else if (choiceComputer ==="paper" & choiceHuman === "rock") {
-    Cscore++
+    Score_comp++
     console.log("Computer wins")
   }  else if (choiceComputer ==="paper" & choiceHuman === "scissors") {
-    Hscore++
+    Score_human++
     console.log("Human wins")
   }  else if (choiceComputer ==="scissors" & choiceHuman === "rock") {
-    Hscore++
+    Score_human++
     console.log("Human wins")
   }  else if (choiceComputer ==="scissors" & choiceHuman === "paper") {
-    Cscore++
+    Score_comp++
     console.log("Computer wins")
   } else if (choiceComputer == choiceHuman) {
-    Cscore = Cscore;
-    Hscore = Hscore;
     console.log("draw")
-  }
-
-  if (Hscore > Cscore) {
-    Score_human++
-  } else {
-    Score_comp++
   }
 }
 
@@ -56,6 +46,9 @@ function VerifyWinner(Score_human, Score_comp) {
     alert("Computer Wins the game")
   } else if (Score_human > Score_comp) {
     alert("Human Wins the game")
+  
+  } else if (Score_human === Score_comp) {
+    alert("Draw -> Nobody wins :(")
   }
 }
 
