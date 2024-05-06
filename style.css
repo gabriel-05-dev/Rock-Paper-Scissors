@@ -1,0 +1,19 @@
+
+.title {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.play {
+    display: flex;
+    padding-top : 30px;
+    justify-content: center;
+}
+
+.choices {
+    display: flex;
+    gap: 2em;
+    justify-content: center;
+}

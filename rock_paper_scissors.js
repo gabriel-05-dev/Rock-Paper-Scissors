@@ -52,14 +52,26 @@ function VerifyWinner(Score_human, Score_comp) {
   }
 }
 
-getHumanChoice();
-getComputerChoice();
-playround(choiceComputer, choiceHuman);
-playround(getHumanChoice(), getComputerChoice());
-playround(getHumanChoice(), getComputerChoice());
-playround(getHumanChoice(), getComputerChoice());
-playround(getHumanChoice(), getComputerChoice());
-VerifyWinner(Score_human, Score_comp);
+const rock_btn = document.querySelector('#rock')
+const paper_btn = document.querySelector('#paper')
+const scissors_btn = document.querySelector('#scissors')
+
+rock_btn.addEventListener('click', () => {
+  choiceHuman = 'rock'
+});
+paper_btn.addEventListener('click', () => {
+  choiceHuman = 'paper'
+});
+scissors_btn.addEventListener('click', () => {
+  choiceHuman = 'scissors'
+});
+
+const play_round_btn = document.querySelector('#playround')
+
+play_round_btn.addEventListener('click', () => {
+  getComputerChoice();
+  playround(choiceHuman, choiceComputer);
+})
 
 // To improve maybe i should add a function to call these functions? e.g main?
 
