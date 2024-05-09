@@ -1,101 +1,42 @@
-let score = 0;
-let Score_human = 0;
-let Score_comp = 0;
+let human_choice = '';
+const rock_button = document.querySelector('#rock');
+const paper_button = document.querySelector('#paper');
+const scissors_button = document.querySelector('#scissors');
+const info_div = document.querySelector('#displayinfo');
+let player_choice_info = document.createElement('p');
+let computer_choice_info = document.createElement('p');
 
+rock_button.addEventListener('click', () => {
+    human_choice = 'rock'
+    updatePlayerinfo(human_choice);
+    return human_choice;
+  });
+paper_button.addEventListener('click', () => {
+    human_choice = 'paper'
+    updatePlayerinfo(human_choice);
+    return human_choice;
+  });
+scissors_button.addEventListener('click', () => {
+    human_choice = 'scissors';
+    updatePlayerinfo(human_choice);
+    return human_choice;
+  });
 
-function getComputerChoice() {
-  let integerRandom = 0;
-  const choices = ["rock", "paper", "scissors"];
-  integerRandom = (Math.floor(Math.random() * 3));
-  choiceComputer = choices[integerRandom]
-  return choiceComputer
+function updatePlayerinfo(human_choice) {
+  player_choice_info.textContent = '';
+  player_choice_info.textContent = 'You chose ' + human_choice;
+  info_div.appendChild(player_choice_info);
 }
 
-function getHumanChoice() { //maybe add error check to see ensure human mistakes are accounted for e.g incorrect spelling
-    choiceHuman = prompt("Rock, Paper or Scissors?");
-    choiceHuman = choiceHuman.toLowerCase();
-    return choiceHuman
-}
-
-function playround(choiceComputer, choiceHuman) {
-  if (choiceComputer === "rock" & choiceHuman === "paper") {
-    Score_human++
-    console.log("Human wins")
-  } else if (choiceComputer ==="rock" & choiceHuman === "scissors") {
-    Score_comp++
-    console.log("Computer wins")
-  } else if (choiceComputer ==="paper" & choiceHuman === "rock") {
-    Score_comp++
-    console.log("Computer wins")
-  }  else if (choiceComputer ==="paper" & choiceHuman === "scissors") {
-    Score_human++
-    console.log("Human wins")
-  }  else if (choiceComputer ==="scissors" & choiceHuman === "rock") {
-    Score_human++
-    console.log("Human wins")
-  }  else if (choiceComputer ==="scissors" & choiceHuman === "paper") {
-    Score_comp++
-    console.log("Computer wins")
-  } else if (choiceComputer == choiceHuman) {
-    console.log("draw")
-  }
-}
-
-function VerifyWinner(Score_human, Score_comp) {
-  if (Score_human < Score_comp) {
-    alert("Computer Wins the game")
-  } else if (Score_human > Score_comp) {
-    alert("Human Wins the game")
-  
-  } else if (Score_human === Score_comp) {
-    alert("Draw -> Nobody wins :(")
-  }
-}
-
-const rock_btn = document.querySelector('#rock')
-const paper_btn = document.querySelector('#paper')
-const scissors_btn = document.querySelector('#scissors')
-
-rock_btn.addEventListener('click', () => {
-  choiceHuman = 'rock'
-});
-paper_btn.addEventListener('click', () => {
-  choiceHuman = 'paper'
-});
-scissors_btn.addEventListener('click', () => {
-  choiceHuman = 'scissors'
-});
-
-const play_round_btn = document.querySelector('#playround')
-
-play_round_btn.addEventListener('click', () => {
-  getComputerChoice();
-  playround(choiceHuman, choiceComputer);
-})
-
-// To improve maybe i should add a function to call these functions? e.g main?
-
+//todo
 
 /*
-
-Pseudo
-
-create score and set it to 0
-create a function called getComputerChoice returns a str value 
-rock/paper/scisccors(math.random)
-create the same function called get human choice with prompt
-
-create two variables, human score and computer score in the global scope
-intialize those variables with the value of 0 
+- Function to generate a computer choice
+= Function to display the computer choice to the user
+- Score function to get the score
+- Function to display the score to the user
+- Playround function to play the game.
 
 
-create a function called playround, which takes in humanChoice and computerChoice.
 
-humanSelection case should be insensitive, .toLowerCase():
-
-
-playround should log a string value e.g ("Youlose/Youwin ") after the round
-is played and the human score/computer score should be based on the round winner
-
-5 Rounds should be played
 */
