@@ -1,0 +1,18 @@
+body {
+    background-color: black;
+}
+
+
+.Welcome_info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+}

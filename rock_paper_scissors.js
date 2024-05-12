@@ -6,15 +6,42 @@ const clear_button = document.querySelector('#clear_choice');
 const info_div = document.querySelector('#displayinfo');
 const battle_button = document.createElement('button');
 const battle_div = document.querySelector('#battle');
+const winner_information = document.createElement('p');
+const new_game_btn = document.createElement('button');
+
+let player_score = 0;
+let computer_score = 0;
 let player_choice_info = document.createElement('p');
 
+//display the scores
+const score_div = document.querySelector('#display_score_information');
+const display_player_score = document.createElement('p');
+const display_computer_score = document.createElement('p');
+
+
+
+//display the winner of the game e.t.c
+
+const winner_div = document.querySelector('#winner_section');
+const display_winner = document.createElement('p');
+
+
+function updateScore() {
+  display_player_score.textContent = 'Player score : ' + player_score;
+  display_computer_score.textContent = 'Computer score : ' + computer_score;
+  score_div.appendChild(display_computer_score);
+  score_div.appendChild(display_player_score);
+}
+
+//event listeners for the player_choices
+
 rock_button.addEventListener('click', () => {
-    human_choice = 'rock'
+    human_choice = 'rock';
     updatePlayerinfo(human_choice);
     return human_choice;
   });
 paper_button.addEventListener('click', () => {
-    human_choice = 'paper'
+    human_choice = 'paper';
     updatePlayerinfo(human_choice);
     return human_choice;
   });
@@ -25,6 +52,7 @@ scissors_button.addEventListener('click', () => {
   });
 clear_button.addEventListener('click', () => {
     human_choice = '';
+    winner_information.textContent = '';
     updatePlayerinfo(human_choice);
     player_choice_info.textContent = '';
     return human_choice;
@@ -34,7 +62,21 @@ clear_button.addEventListener('click', () => {
   battle_div.appendChild(battle_button);
 
   battle_button.addEventListener('click', () => {
-    playRound(human_choice)
+    playRound(human_choice);
+  })
+
+  new_game_btn.textContent= 'New Game';
+  info_div.appendChild(new_game_btn);
+  new_game_btn.addEventListener('click', () => {
+    computer_score = 0;
+    player_score = 0;
+    rounds_info = 0;
+    display_player_score.textContent = '';
+    display_computer_score.textContent = '';
+    human_choice = '';
+    winner_information.textContent = '';
+    updatePlayerinfo(human_choice);
+    player_choice_info.textContent = '';
   })
 
 
@@ -52,42 +94,58 @@ function getComputerChoice() {
   return computer_choice;
 }
 
+function check_Winner(player_score, computer_score) {
+  if (player_score === computer_score) {
+    display_winner.textContent= 'There is no winner! Draw! - Press New Game to play again!';
+    winner_div.appendChild(display_winner);
+  }
+  else if (player_score > computer_score) {
+    display_winner.textContent = 'Player wins! - Press New Game to play again!';
+    winner_div.appendChild(display_winner);
 
-function playRound(human_choice) {
-  computer_choice = getComputerChoice();
-  if (computer_choice === "rock" & human_choice === "paper") {
-    console.log("Human wins")
-  } else if (computer_choice ==="rock" & human_choice === "scissors") {
-    console.log("Computer wins")
-  } else if (computer_choice ==="paper" & human_choice === "rock") {
-    console.log("Computer wins")
-  }  else if (computer_choice ==="paper" & human_choice === "scissors") {
-    console.log("Human wins")
-  }  else if (computer_choice ==="scissors" & human_choice === "rock") {
-    console.log("Human wins")
-  }  else if (computer_choice ==="scissors" & human_choice === "paper") {
-    console.log("Computer wins")
-  } else if (computer_choice == human_choice) {
-    console.log("draw")
+  } else if (computer_score > player_score) {
+    display_winner.textContent = 'Computer wins! - Press New Game to play again!';
+    winner_div.appendChild(display_winner);
   }
 }
 
 
+// Winner wins at 5 points! 
 
+function playRound(human_choice) {
+  computer_choice = getComputerChoice();
+  winner_information.textContent = '';
+  if (player_score >=5 || computer_score >=5) {
+    check_Winner(player_score, computer_score);
+  } else if (computer_choice === "rock" & human_choice === "paper") {
+    winner_information.textContent = 'Player Wins! the computer chose ' + computer_choice;
+    player_score += 1;
+  } else if (computer_choice ==="rock" & human_choice === "scissors") {
+    winner_information.textContent = 'Computer Wins, the computer chose ' + computer_choice;
+    computer_score += 1;
 
-/*functions
+  } else if (computer_choice ==="paper" & human_choice === "rock") {
+    winner_information.textContent = 'Computer Wins, the computer chose ' + computer_choice;
+    computer_score += 1;
 
-getComputerChoice() -> returns rock'paper'scissors evertime it is called.
+  }  else if (computer_choice ==="paper" & human_choice === "scissors") {
+    winner_information.textContent = 'Player Wins! the computer chose ' + computer_choice;
+    player_score += 1;
 
+  }  else if (computer_choice ==="scissors" & human_choice === "rock") {
+    winner_information.textContent = 'Player Wins! the computer chose ' + computer_choice;
+    player_score += 1;
 
+  }  else if (computer_choice ==="scissors" & human_choice === "paper") {
+    winner_information.textContent = 'Computer Wins, the computer chose ' + computer_choice;
+    computer_score += 1;
 
-/*
-- Function to generate a computer choice
-= Function to display the computer choice to the user
-- Score function to get the score
-- Function to display the score to the user
-- Playround function to play the game.
-
-
-
-*/
+  } else if (computer_choice == human_choice) {
+    winner_information.textContent = 'Round Draw!!';
+    player_score += 1;
+    computer_score += 1;
+  }
+  battle_div.appendChild(winner_information);
+  human_choice = '';
+  updateScore();
+}
