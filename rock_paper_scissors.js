@@ -4,6 +4,8 @@ const paper_button = document.querySelector('#paper');
 const scissors_button = document.querySelector('#scissors');
 const clear_button = document.querySelector('#clear_choice');
 const info_div = document.querySelector('#displayinfo');
+const battle_button = document.createElement('button');
+const battle_div = document.querySelector('#battle');
 let player_choice_info = document.createElement('p');
 
 rock_button.addEventListener('click', () => {
@@ -28,6 +30,14 @@ clear_button.addEventListener('click', () => {
     return human_choice;
   });
 
+  battle_button.textContent = 'Battle!';
+  battle_div.appendChild(battle_button);
+
+  battle_button.addEventListener('click', () => {
+    playRound(human_choice)
+  })
+
+
 function updatePlayerinfo(human_choice) {
   player_choice_info.textContent = '';
   player_choice_info.textContent = 'You chose ' + human_choice;
@@ -44,7 +54,7 @@ function getComputerChoice() {
 
 
 function playRound(human_choice) {
-  getComputerChoice();
+  computer_choice = getComputerChoice();
   if (computer_choice === "rock" & human_choice === "paper") {
     console.log("Human wins")
   } else if (computer_choice ==="rock" & human_choice === "scissors") {
